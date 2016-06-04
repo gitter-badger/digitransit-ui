@@ -72,7 +72,7 @@ function getSourceMapPlugin(testPattern,prefix) {
     append: '\n//# sourceMappingURL=' + prefix + '[url]',
     module: true,
     columns: true,
-    lineToLine: true
+    lineToLine: false
   })
 }
 
