@@ -1,9 +1,22 @@
 /* eslint no-param-reassign: 0, no-console: 0, strict: 0, global-require: 0 */
 'use strict';
+const path = require('path')
 
 /* ********* Polyfills (for node) **********/
 require('node-cjsx').transform();
-require('babel-core/register')();
+require('babel-register')({
+  'presets': ['stage-1', 'react'],
+  'plugins': [
+    'transform-es2015-destructuring',
+    'transform-es2015-parameters',
+    'transform-es2015-modules-commonjs',
+    path.join(process.cwd(), 'build/babelRelayPlugin')
+  ],
+  'ignore': [
+    /node_modules/,
+    'app/util/piwik.js'
+  ],
+});
 
 global.fetch = require('node-fetch');
 global.self = { fetch: global.fetch };
@@ -27,7 +40,7 @@ const app = express();
 
 /* Setup functions */
 function setUpStaticFolders() {
-  const staticFolder = `${process.cwd()}/_static`;
+  const staticFolder = path.join(process.cwd(), '_static');
   // Sert cache for 1 week
   app.use(config.APP_PATH, express.static(staticFolder, { maxAge: 604800000 }));
 }
