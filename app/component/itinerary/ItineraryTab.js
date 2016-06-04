@@ -16,7 +16,7 @@ class ItineraryTab extends React.Component {
   };
 
   constructor(args) {
-    super(...args);
+    super(args);
 
     this.state = {
       fullscreen: false,
@@ -24,7 +24,6 @@ class ItineraryTab extends React.Component {
       lon: undefined,
     };
 
-    this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this);
     this.getState = this.getState.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
