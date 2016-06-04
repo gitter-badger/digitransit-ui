@@ -1,20 +1,21 @@
 /* eslint no-param-reassign: 0, no-console: 0, strict: 0, global-require: 0 */
 'use strict';
-const path = require('path')
+const path = require('path');
 
 /* ********* Polyfills (for node) **********/
 require('node-cjsx').transform();
 require('babel-register')({
-  'presets': ['stage-1', 'react'],
-  'plugins': [
+  presets: ['stage-2', 'react'],
+  plugins: [
+    'transform-class-properties',
     'transform-es2015-destructuring',
     'transform-es2015-parameters',
     'transform-es2015-modules-commonjs',
-    path.join(process.cwd(), 'build/babelRelayPlugin')
+    path.join(process.cwd(), 'build/babelRelayPlugin'),
   ],
-  'ignore': [
+  ignore: [
     /node_modules/,
-    'app/util/piwik.js'
+    'app/util/piwik.js',
   ],
 });
 
