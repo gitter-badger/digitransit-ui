@@ -1,13 +1,13 @@
 import Store from 'fluxible/addons/BaseStore';
 
-class DisruptionInfoStore extends Store {
+export default class DisruptionInfoStore extends Store {
   static handlers = {
     openDisruptionInfo: 'open',
     closeDisruptionInfo: 'close',
   };
 
-  constructor(...args) {
-    super(...args);
+  constructor(args) {
+    super(args);
     this.isOpen = false;
   }
 
@@ -23,5 +23,3 @@ class DisruptionInfoStore extends Store {
     this.emitChange();
   }
 }
-
-export default DisruptionInfoStore;

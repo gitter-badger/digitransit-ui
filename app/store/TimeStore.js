@@ -1,7 +1,7 @@
 import Store from 'fluxible/addons/BaseStore';
 import moment from 'moment';
 
-class TimeStore extends Store {
+export default class TimeStore extends Store {
   static storeName = 'TimeStore';
   static TWICE_PER_MINUTE = 30 * 1000;
 
@@ -98,5 +98,3 @@ class TimeStore extends Store {
     SetDepartureTime: 'setDepartureTime',
   };
 }
-
-export default TimeStore;
