@@ -97,16 +97,9 @@ function getPluginsConfig(env) {
     new webpack.ContextReplacementPlugin(reactIntlExpression, languageExpression),
     new webpack.ContextReplacementPlugin(intlExpression, languageExpression),
     new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('production')}}),
-    new webpack.PrefetchPlugin('react'),
-    new webpack.PrefetchPlugin('react-router'),
-    new webpack.PrefetchPlugin('fluxible'),
-    new webpack.PrefetchPlugin('leaflet'),
     new webpack.HashedModuleIdsPlugin(),
     getSourceMapPlugin(/\.(js)($|\?)/i,'/js/'),
     getSourceMapPlugin(/\.(css)($|\?)/i,'/css/'),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['common', 'leaflet', 'manifest'],
-    }),
     new StatsPlugin('../stats.json', {chunkModules: true}),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     // new webpack.optimize.DedupePlugin(), // TODO:crashes weirdly
@@ -148,20 +141,6 @@ function getDevelopmentEntry() {
 function getEntry() {
   const entry = {
     main: './app/client',
-    common: [ // These come from all imports in client.cjsx
-      'react',
-      'react-dom',
-      'react-relay',
-      'react-router-relay',
-      'fluxible-addons-react/provideContext',
-      'react-tap-event-plugin',
-      './app/util/store-listening-intl-provider',
-      './app/history',
-      'fluxible',
-      'material-ui/styles/getMuiTheme',
-      'material-ui/styles/MuiThemeProvider',
-    ],
-    leaflet: ['leaflet'],
   };
 
   const directories = getDirectories('./sass/themes');

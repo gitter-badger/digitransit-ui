@@ -45,8 +45,6 @@ let css;
 
 if (process.env.NODE_ENV !== 'development') {
   stats = require('../stats.json'); // eslint-disable-line global-require
-  const manifestFile = getStringOrArrayElement(stats.assetsByChunkName.manifest, 0);
-  manifest = fs.readFileSync(`${appRoot}_static/${manifestFile}`);
   css = [
     <link
       rel="stylesheet"
@@ -115,13 +113,6 @@ function getScripts(req) {
     return <script async src={`//${host}:${port}/js/bundle.js`} />;
   }
   return [
-    <script dangerouslySetInnerHTML={{ __html: manifest }} />,
-    <script
-      src={`${config.APP_PATH}/${getStringOrArrayElement(stats.assetsByChunkName.common, 0)}`}
-    />,
-    <script
-      src={`${config.APP_PATH}/${getStringOrArrayElement(stats.assetsByChunkName.leaflet, 0)}`}
-    />,
     <script
       src={`${config.APP_PATH}/${getStringOrArrayElement(stats.assetsByChunkName.main, 0)}`}
     />,
