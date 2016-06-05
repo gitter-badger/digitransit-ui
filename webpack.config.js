@@ -14,7 +14,7 @@ function getLoadersConfig(env) {
   if (env === 'development') {
     return ([
       { test: /\.css$/, loaders: ['style', 'css', 'postcss']},
-      { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx']},
+      { test: /\.cjsx$/, loaders: ['coffee', 'cjsx']},
       { test: /\.coffee$/, loader: 'coffee' },
       { test: /\.json$/, loader: 'json'},
       { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass']},
