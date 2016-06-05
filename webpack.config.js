@@ -110,6 +110,15 @@ function getPluginsConfig(env) {
     new StatsPlugin('../stats.json', {chunkModules: true}),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     // new webpack.optimize.DedupePlugin(), // TODO:crashes weirdly
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+      mangle: {
+        except: ['$super', '$', 'exports', 'require', 'window'],
+      },
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
