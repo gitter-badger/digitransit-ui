@@ -46,6 +46,7 @@ function getLoadersConfig(env) {
       query: {
         'presets': ['es2015-webpack-loose', 'react', 'stage-2'],
         'plugins': [
+          'react-hot-loader/babel',
           'transform-class-properties',
           path.join(__dirname, 'build/babelRelayPlugin'),
         ],
@@ -133,6 +134,7 @@ function getDevelopmentEntry() {
   const entry = [
     'webpack-dev-server/client?http://localhost:' + port,
     'webpack/hot/dev-server',
+    'react-hot-loader/patch',
     './app/client',
   ];
   return entry;

@@ -6,6 +6,7 @@ import Relay from 'react-relay';
 import { RelayRouter } from 'react-router-relay';
 import provideContext from 'fluxible-addons-react/provideContext';
 import tapEventPlugin from 'react-tap-event-plugin';
+import { AppContainer } from 'react-hot-loader';
 import config from './config';
 import StoreListeningIntlProvider from './util/store-listening-intl-provider';
 import app from './app';
@@ -152,13 +153,15 @@ const callback = () => app.rehydrate(window.state, (err, context) => {
   });
 
   ReactDOM.render(
-    <ContextProvider translations={translations} context={context.getComponentContext()}>
-      <MuiThemeProvider muiTheme={getMuiTheme({}, { userAgent: navigator.userAgent })}>
-        <DesktopWrapper>
-          <RelayRouter history={history} children={app.getComponent()} onUpdate={track} />
-        </DesktopWrapper>
-      </MuiThemeProvider>
-    </ContextProvider>
+    <AppContainer>
+      <ContextProvider translations={translations} context={context.getComponentContext()}>
+        <MuiThemeProvider muiTheme={getMuiTheme({}, { userAgent: navigator.userAgent })}>
+          <DesktopWrapper>
+            <RelayRouter history={history} children={app.getComponent()} onUpdate={track} />
+          </DesktopWrapper>
+        </MuiThemeProvider>
+      </ContextProvider>
+    </AppContainer>
     , document.getElementById('app')
     , trackReactPerformance
   );
@@ -190,4 +193,21 @@ if (typeof window.Intl !== 'undefined') {
   }
 
   Promise.all(modules).then(callback);
+}
+
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    ReactDOM.render(
+      <AppContainer>
+        <ContextProvider translations={translations} context={window.context.getComponentContext()}>
+          <MuiThemeProvider muiTheme={getMuiTheme({}, { userAgent: navigator.userAgent })}>
+            <DesktopWrapper>
+              <RelayRouter history={history} children={app.getComponent()} onUpdate={track} />
+            </DesktopWrapper>
+          </MuiThemeProvider>
+        </ContextProvider>
+      </AppContainer>
+      , document.getElementById('app')
+    );
+  });
 }
