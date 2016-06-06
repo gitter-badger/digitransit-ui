@@ -29,7 +29,9 @@ function getLoadersConfig(env) {
             'transform-class-properties',
             path.join(__dirname, 'build/babelRelayPlugin'),
           ],
-          'ignore': ['app/util/piwik.js'],
+          ignore: [
+            'app/util/piwik.js',
+          ],
         },
       },
     ]);
@@ -52,7 +54,9 @@ function getLoadersConfig(env) {
           'transform-class-properties',
           path.join(__dirname, 'build/babelRelayPlugin'),
         ],
-        'ignore': ['app/util/piwik.js'],
+        ignore: [
+          'app/util/piwik.js',
+        ],
       },
     },
   ]);
