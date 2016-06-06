@@ -93,6 +93,7 @@ function getPolyfills(userAgent) {
     features,
     minify: true,
     unknown: 'polyfill',
+    excludes: ['WeakMap'],
   });
 }
 
