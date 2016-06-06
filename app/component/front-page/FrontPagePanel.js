@@ -26,8 +26,8 @@ export default class FrontPagePanel extends React.Component {
     executeAction: React.PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
+  constructor(args) {
+    super(args);
     this.getSelectedPanel = this.getSelectedPanel.bind(this);
     this.selectPanel = this.selectPanel.bind(this);
     this.closePanel = this.closePanel.bind(this);
